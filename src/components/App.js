@@ -23,9 +23,11 @@ class App extends React.Component {
 
   onFindPetsClick = () => {
     let endpoint = "/api/pets"
-    // Filtered endpoint: "/api/pets?type=cat"
-    // TO DO
-    // add filter functionality
+   
+    if (this.state.filters.type !== 'all') {
+      endpoint += `?type=$(this.state.filters.type)`
+    }
+
     fetch(endpoint)
     .then(resp => resp.json())
     .then(data => {
