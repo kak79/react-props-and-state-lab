@@ -11,7 +11,12 @@ class PetBrowser extends React.Component {
         onAdoptPet={this.props.onAdoptPet}
       />
     ))
-    return <div className="ui cards">(petCards)</div>
+
+    return <div 
+      className="ui cards">
+        {petCards}
+    </div>
+
   }
 }
 

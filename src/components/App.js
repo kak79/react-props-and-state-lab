@@ -25,7 +25,7 @@ class App extends React.Component {
     let endpoint = "/api/pets"
    
     if (this.state.filters.type !== 'all') {
-      endpoint += `?type=$(this.state.filters.type)`
+      endpoint += `?type=${this.state.filters.type}`
     }
 
     fetch(endpoint)
@@ -33,13 +33,18 @@ class App extends React.Component {
     .then(data => {
       this.setState({
         pets: data
-      }, () => {console.log(this.state.pets)})
+      })
     })
   }
 
   onAdoptPet = (petId) => {
-    // TO DO
-    // this callback should take in an id for a pet, find the matching pet in state.pets and set the isAdopted property to true
+    const updatedPets = this.state.pets.map(pet => {
+      return pet.id === petId ? {...pet, isAdopted: true} : pet
+    })
+
+    this.setState({
+      pets: updatedPets
+    })
   }
 
   render() {
